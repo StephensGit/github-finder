@@ -10,13 +10,19 @@ export class Search extends Component {
         searchUsers: PropTypes.func.isRequired,
         clearUsers:  PropTypes.func.isRequired,
         showClear: PropTypes.bool.isRequired,
+        setAlert: PropTypes.func.isRequired,
     }
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.searchUsers(this.state.text);
-        // This clears the search bar after submitted
-        this.setState({ text: '' });
+        if(this.state.text === '') {
+            this.props.setAlert('Please enter a user name', 'light')
+        } else {
+            this.props.searchUsers(this.state.text);
+            // This clears the search bar after submitted
+            this.setState({ text: '' });
+        }
+
     }
 
     onChange = (e) => {
@@ -39,6 +45,7 @@ export class Search extends Component {
                     />
                     <input type="submit" value="Search" className="btn btn-dark btn-block"/>
                 </form>
+                {/* If showclear is true, it will display the clear button */}
                 {showClear && (
                     <button 
                         className="btn btn-light btn-block" 
