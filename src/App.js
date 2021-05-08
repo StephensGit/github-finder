@@ -27,6 +27,7 @@ class App extends Component {
   // }
 
   // Search GitHub users
+  // when using async with an arrow function, put it before the paramter
   searchUsers = async (text) => {
     this.setState({ loading: true });
     const res = await axios.get(

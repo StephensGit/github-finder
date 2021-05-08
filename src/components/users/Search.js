@@ -27,6 +27,7 @@ export class Search extends Component {
 
     onChange = (e) => {
         // Using e.target.name to get that specific onChange event, incase there's more later
+        // this.setState({ text: e.target.value })
         this.setState({ [e.target.name]: e.target.value })
         // console.log(this.state.text);
     }
