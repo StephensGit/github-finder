@@ -1,48 +1,39 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-export class Search extends Component {
-    state = {
-        text: ''
-    }
+// export class Search extends Component {
+const Search = ({ searchUsers, showClear, clearUsers, setAlert }) => {
+    const [text, setText] = useState('');
 
-    static propTypes = {
-        searchUsers: PropTypes.func.isRequired,
-        clearUsers:  PropTypes.func.isRequired,
-        showClear: PropTypes.bool.isRequired,
-        setAlert: PropTypes.func.isRequired,
-    }
-
-    onSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        if(this.state.text === '') {
-            this.props.setAlert('Please enter a user name', 'light')
+        if(text === '') {
+            setAlert('Please enter a user name', 'light')
         } else {
-            this.props.searchUsers(this.state.text);
+            searchUsers(text);
             // This clears the search bar after submitted
-            this.setState({ text: '' });
+            setText(' ');
         }
 
     }
 
-    onChange = (e) => {
+    const onChange = (e) => {
         // Using e.target.name to get that specific onChange event, incase there's more later
         // this.setState({ text: e.target.value })
-        this.setState({ [e.target.name]: e.target.value })
+        setText(e.target.value)
         // console.log(this.state.text);
     }
 
-    render() {
-        const { showClear, clearUsers } = this.props;
+
         return (
             <div>
-                <form onSubmit={this.onSubmit} className="form">
+                <form onSubmit={onSubmit} className="form">
                     <input 
                         type="text" 
                         name="text" 
                         placeholder="Search Users..."
-                        value={this.state.text}
-                        onChange={this.onChange}
+                        value={text}
+                        onChange={onChange}
                     />
                     <input type="submit" value="Search" className="btn btn-dark btn-block"/>
                 </form>
@@ -57,8 +48,14 @@ export class Search extends Component {
                 )}
 
             </div>
-        )
-    }
+        ) 
+}
+
+Search.propTypes = {
+    searchUsers: PropTypes.func.isRequired,
+    clearUsers:  PropTypes.func.isRequired,
+    showClear: PropTypes.bool.isRequired,
+    setAlert: PropTypes.func.isRequired,
 }
 
 export default Search
