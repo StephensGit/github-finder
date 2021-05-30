@@ -8,7 +8,7 @@ import User from './components/users/User';
 import Alert from './components/layout/Alert';
 import axios from 'axios';
 
-import GithubState from './context/github/githubState'
+import GithubState from './context/github/githubState';
 
 import './App.css';
 
@@ -19,6 +19,8 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
 
+
+  
   //  Search Single User
   const getUser = async (username) => {
     setLoading(true);
