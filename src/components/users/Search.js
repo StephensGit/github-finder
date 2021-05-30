@@ -4,8 +4,8 @@ import GithubContext from '../../context/github/githubContext';
 
 // export class Search extends Component {
 const Search = ({ showClear, clearUsers, setAlert }) => {
-    const githubContext = useContext(GithubContext);
 
+  
     const [text, setText] = useState('');
 
     const onSubmit = (e) => {
